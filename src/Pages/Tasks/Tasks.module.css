@@ -1,0 +1,13 @@
+.tasksContainer{
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+    justify-content: center;
+    overflow-x: hidden;
+}
+
+.task{
+    max-width: 100%;
+    padding: 15px;
+    
+}   

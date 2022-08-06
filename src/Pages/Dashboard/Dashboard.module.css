@@ -1,0 +1,21 @@
+#avatar{
+    border-radius: 50%;
+    width: 18vw;
+}
+
+.userDetails{
+    align-self: center;
+    padding-left: 1.2rem;
+    padding-bottom: 1rem;
+}
+
+.tasksBtn{
+    border-radius: 19px;
+    background-color: var(--gray);
+    padding: 1.3rem 2rem;
+}
+
+.tasksBtn p{
+    font-weight: 700;
+    opacity: 0.3;
+}

@@ -1,15 +1,19 @@
 {
   "files": {
-    "main.css": "/diary/static/css/main.d0f1b6db.css",
-    "main.js": "/diary/static/js/main.7e2df052.js",
+    "main.css": "/diary/static/css/main.bb994259.css",
+    "main.js": "/diary/static/js/main.d2dfd6af.js",
     "static/js/787.2bb62d5b.chunk.js": "/diary/static/js/787.2bb62d5b.chunk.js",
+    "static/media/goals.png": "/diary/static/media/goals.c55e5dcdaf1f829dbe4a.png",
+    "static/media/buy.png": "/diary/static/media/buy.06b0345ff8aa6cdf3234.png",
+    "static/media/problems.png": "/diary/static/media/problems.4634ce5781dc25201c9d.png",
+    "static/media/learnings.png": "/diary/static/media/learnings.30533803d937f07153ea.png",
     "index.html": "/diary/index.html",
-    "main.d0f1b6db.css.map": "/diary/static/css/main.d0f1b6db.css.map",
-    "main.7e2df052.js.map": "/diary/static/js/main.7e2df052.js.map",
+    "main.bb994259.css.map": "/diary/static/css/main.bb994259.css.map",
+    "main.d2dfd6af.js.map": "/diary/static/js/main.d2dfd6af.js.map",
     "787.2bb62d5b.chunk.js.map": "/diary/static/js/787.2bb62d5b.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.d0f1b6db.css",
-    "static/js/main.7e2df052.js"
+    "static/css/main.bb994259.css",
+    "static/js/main.d2dfd6af.js"
   ]
 }

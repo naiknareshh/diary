@@ -13,6 +13,7 @@ function Tasks(props){
 
     async function getTasks(){
         let res = await getAllTasks();
+        console.log('tasks', res);
         setTasks(res);
     }
 

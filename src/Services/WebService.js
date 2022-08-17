@@ -2,13 +2,23 @@ import axios from "axios";
 
 const ENDPOINT_URL = "https://18tcsnkaef.execute-api.us-east-1.amazonaws.com/diary-prod";
 
+export function getApiKey(){
+  return axios.defaults.headers.common['x-api-key'];
+}
+
+export function setApiKey(apiKey){
+  axios.defaults.headers.common['x-api-key'] = apiKey;
+}
+
 export async function getAllTasks() {
 
-  let res = await axios.get('https://1l4sfqk1wh.execute-api.us-east-1.amazonaws.com/default/getAllTasks');
-  return res.data;
-
-  // return [{"task_id":"2","task":"Haircut", "isComplete": true},{"task_id":"1","task":"Finish Lambda basics", "isComplete": true}];
-
+  try{    
+    let res = await axios.get(`${ENDPOINT_URL}/getalltasks`);
+    return res.data;
+  }
+  catch(error){
+    throw new Error('Invalid API Key')
+  }
 }
 
 export async function getAllBuys() {
@@ -16,9 +26,6 @@ export async function getAllBuys() {
   let res = await axios.get(`${ENDPOINT_URL}/getAllBuys`);
   console.log('response ', res.data);
   return res.data;
-
-  // return [{"task_id":"2","task":"Haircut", "isComplete": true},{"task_id":"1","task":"Finish Lambda basics", "isComplete": true}];
-
 }
 
 export async function createTask(task, isComplete, date, taskId){
@@ -39,13 +46,11 @@ export async function createBuy(item, isComplete, date, buyId){
 export async function updateTasks(tasks){
   let res = await axios.post(`${ENDPOINT_URL}/updateTasks`, { tasks });
   return res.data;
-  // return { message :'Updated`, tasks: tasks };
 }
 
 export async function deleteTasks(tasks){
   let res = await axios.post(`${ENDPOINT_URL}/deleteTask`, { tasks });
   return res.data;
-  // return { message :'Updated`, tasks: tasks };
 }
 
 export async function updateBuy(items){

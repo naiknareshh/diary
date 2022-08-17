@@ -1,21 +1,42 @@
-import logo from "./logo.svg";
 import "./App.css";
+import React from "react";
 import Dashboard from "./Pages/Dashboard/Dashboard";
-import { Route, Link, BrowserRouter, Routes } from "react-router-dom";
 import Tasks from "./Pages/Tasks/Tasks";
+import Buy from "./Pages/Buy/Buy";
+import { useState } from "react";
+import { Pages } from "./Constants";
+import { useEffect } from "react";
+import { getAllTasks } from "./Services/WebService";
+import 'font-awesome/css/font-awesome.min.css';
+import Journal from "./Pages/Journal/Journal";
 
-function App() {
+const App = () => {
+
+  const [currentPage, setCurrentPage] = useState(Pages.HOME);
+  const [tasks, setTasks] = useState([]);
+
+  useEffect(() => {
+    getAllTasks().then((res) => {
+      setTasks(res);
+    });
+  }, []);
+
+  function navigateTo(page){
+    setCurrentPage(page);
+  }
+
   return (
-    <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/tasks" element={<Tasks/>} />
-        </Routes>
-      </BrowserRouter>
-    </>
+    <div className="App">
+      {
+        {
+          [Pages.HOME]: <Dashboard navigateTo={navigateTo} tasks={tasks}/>,
+          [Pages.TASKS]: <Tasks navigateTo={navigateTo} tasks={tasks}/>,
+          [Pages.JOURNAL]: <Journal navigateTo={navigateTo}/>,
+          [Pages.BUY]: <Buy navigateTo={navigateTo}/>
+        }[currentPage]
+      }
+    </div>
   );
-}
+};
 
 export default App;

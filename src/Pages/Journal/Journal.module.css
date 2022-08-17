@@ -1,0 +1,11 @@
+.date{
+    min-width: 50px;
+    max-width: 50px;
+    overflow: hidden;
+}
+
+.addBtn{
+    background-color: #084298 !important;
+    color: white !important;
+    height: 6vh;
+}

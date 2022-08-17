@@ -1,11 +1,11 @@
-.tasksContainer{
+.itemsContainer{
     display: flex;
     height: calc(100vh - 70px);
     flex-direction: column;
     overflow-x: hidden;
 }
 
-.task{
+.item{
     max-width: 100%;
     padding: 12px;
     
@@ -30,4 +30,10 @@
     margin-left: auto;
     font-size: 14px;
     color: #ccc;
+}
+
+.taskComplete{
+    text-decoration: line-through;
+    font-style: italic;
+    background: #f3f3f3;;
 }

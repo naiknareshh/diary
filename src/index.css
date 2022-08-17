@@ -11,3 +11,18 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.nomargin{
+  margin: 0;
+}
+
+.fa-angle-left{
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.centered{
+  position: fixed;
+  left: 50%;
+  transform: translate(-50%, 0);
+}

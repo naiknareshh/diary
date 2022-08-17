@@ -1,0 +1,14 @@
+.addBtn{
+    filter: drop-shadow(2px 4px 6px #ccc);
+    display: flex;
+    position: fixed;
+    bottom: 5vh;
+    right: 10vw;
+    background: #dc3545;
+    padding: 15px;
+    border-radius: 50%;
+    color: white;
+    width: 50px;
+    height: 50px;
+    font-size: 1.5em;
+}

@@ -19,7 +19,6 @@ function Tasks(props){
 
     async function createItemCallback(item, isComplete, date, itemId){
         let res = await createTask(item, isComplete, date, itemId);
-        res.task.date = date;
         return res;
     }
 

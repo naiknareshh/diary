@@ -26,8 +26,9 @@ function Journal(props) {
 
   useEffect(() => {
     async function getJournals() {
-      let journals = await getAllJournals();
-      setJournals(journals);
+      let response = await getAllJournals();
+      console.log('journals ', response);
+      setJournals(response);
     }
 
     getJournals();

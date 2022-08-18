@@ -79,6 +79,7 @@ function ChecklistLayout(props) {
     e.target.classList.add("text-danger");
     setShowSaveBtn(true);
     updatedList.current.push(item);
+    console.log(item);
     let newList = tItems.current.filter((t) => {
       return t[props.idKey] !== item[props.idKey];
     });

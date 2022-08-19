@@ -12,6 +12,7 @@ import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
 import Toast from "react-bootstrap/Toast";
 import ToastContainer from "react-bootstrap/ToastContainer";
+import Header from "../../CustomComponents/Header/Header";
 
 function ChecklistLayout(props) {
   const [show, setShow] = useState(false);
@@ -19,6 +20,8 @@ function ChecklistLayout(props) {
   const [showSaveBtn, setShowSaveBtn] = useState(false);
   const [toastText, setToastText] = useState("");
   const [newItem, setNewItem] = useState("");
+  const [newItemDescription, setNewItemDescription] = useState("");
+  const [newItemToggle, setNewItemToggle] = useState(1);
   const [loading, setLoading] = useState(false);
   const [deleteMode, setDeleteMode] = useState(false);
   const [items, setItems] = useState(props.items);
@@ -40,9 +43,11 @@ function ChecklistLayout(props) {
     let itemId = items.length + 1;
     let res = await props.createItemCallback(
       newItem,
+      newItemDescription,
       false,
       `${date.getDate()}/${date.getMonth() + 1}`,
-      String(itemId)
+      String(itemId),
+      newItemToggle
     );
     setItems(JSON.parse(JSON.stringify(tItems.current)));
     handleClose();
@@ -54,6 +59,14 @@ function ChecklistLayout(props) {
 
   function onChange(e) {
     setNewItem(e.target.value);
+  }
+
+  function onChangeDescription(e) {
+    setNewItemDescription(e.target.value);
+  }
+
+  function onChangeToggle(val){
+    setNewItemToggle(val);
   }
 
   async function saveChanges() {
@@ -79,7 +92,6 @@ function ChecklistLayout(props) {
     e.target.classList.add("text-danger");
     setShowSaveBtn(true);
     updatedList.current.push(item);
-    console.log(item);
     let newList = tItems.current.filter((t) => {
       return t[props.idKey] !== item[props.idKey];
     });
@@ -88,46 +100,33 @@ function ChecklistLayout(props) {
 
   return (
     <>
-      <div
-        className="d-flex position-sticky p-3 top-0 bg-light"
-        style={{ zIndex: 99 }}
-      >
-        <Button
-          onClick={() => props.navigateTo(Pages.HOME)}
-          variant="btn btn-outline-primary bg-white"
-        >
-          <i className="fa fa-angle-left"></i>Back
-        </Button>
-        <Button
-          type="button"
-          variant="btn btn-btn btn-danger ms-auto"
-          onClick={() => {
-            if (deleteMode) {
-              tItems.current = props.items;
-              setShowSaveBtn(false);
-            }
-            setDeleteMode(!deleteMode);
-          }}
-        >
-          {deleteMode ? (
-            "Cancel"
-          ) : (
-            <i className="fa fa-trash color-white" aria-hidden="true"></i>
-          )}
-        </Button>
-      </div>
+      <Header
+        navigateTo={props.navigateTo}
+        setDeleteMode={(deleteModeFlag) => {
+          if (deleteModeFlag) {
+            tItems.current = props.items;
+            setShowSaveBtn(false);
+          }
+          setDeleteMode(deleteModeFlag);
+        }}
+      />
       <div className={styles.itemsContainer}>
         {items?.map((item, index) => {
           if (item && item[props.idKey]) {
             return (
-              <div className={`d-flex ${styles.item} ${item.isComplete && styles.taskComplete}`} key={item[props.idKey]}>
+              <div
+                className={`d-flex ${styles.item} ${
+                  item.isComplete && styles.taskComplete
+                }`}
+                key={item[props.idKey]}
+              >
                 <Checkbox
                   disabled={loading}
                   items={tItems.current}
                   index={index}
                   isComplete={item.isComplete}
                   name={item[props.valKey]}
-                  subtitle={item.subtitle}
+                  subtitle={item.description}
                   callback={() => {
                     let isEqual = true;
                     updatedList.current = [];
@@ -163,7 +162,7 @@ function ChecklistLayout(props) {
                 )}
               </div>
             );
-          }else{
+          } else {
             return null;
           }
         })}
@@ -192,10 +191,13 @@ function ChecklistLayout(props) {
         title="Create Item"
         label="Item"
         onChange={onChange}
+        onChangeDescription={onChangeDescription}
+        onChangeToggle={onChangeToggle}
         handleClose={handleClose}
         handleSubmit={handleSubmit}
         loading={loading}
-        inputType="text"
+        inputType={props.inputType}
+        layoutType={props.layoutType}
       />
       {showSaveBtn && (
         <Button

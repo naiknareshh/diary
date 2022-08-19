@@ -37,3 +37,9 @@
     font-style: italic;
     background: #f3f3f3;;
 }
+
+.subtitle{
+    margin-left: 42px;
+    font-size: 1em;
+    color: #aaa;
+}

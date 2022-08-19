@@ -1,3 +1,3 @@
-const Pages = { HOME: 0, TASKS: 1, JOURNAL: 2, BUY: 3 };
+const Pages = { HOME: "Home", TASKS: "Tasks", JOURNAL: "Journal", BUY: "Buy List", GOALS: "Goals" };
 
 export {Pages};

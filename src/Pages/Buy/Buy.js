@@ -36,6 +36,7 @@ function Buy(props){
         <ChecklistLayout
             idKey="buy_id"
             valKey="item"
+            inputType="text"
             items={buys}
             refreshList={getBuys}
             createItemCallback={createItemCallback}

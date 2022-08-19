@@ -20,15 +20,14 @@ export async function getAllTasks() {
       return a.task_id - b.task_id;
     });
   } catch (error) {
-    console.log(error);
     throw new Error("Invalid API Key");
   }
 }
 
-export async function createTask(task, isComplete, date, taskId) {
+export async function createTask(task, description, isComplete, date, taskId) {
   let res = await axios.post(
     `${ENDPOINT_URL}/createData-Diary-Prod?table=tasks`,
-    { task, isComplete, date, task_id: String(taskId) }
+    { task, description, isComplete, date, task_id: String(taskId) }
   );
   return res.data;
 }
@@ -53,12 +52,11 @@ export async function getAllBuys() {
   let res = await axios.get(`${ENDPOINT_URL}/getData-Diary-Prod`, {
     params: { table: "buy" },
   });
-  console.log("response ", res.data);
   return res.data;
 }
 
 export async function createBuy(item, isComplete, date, buyId) {
-  let res = await axios.post(`${ENDPOINT_URL}/createBuy`, {
+  let res = await axios.post(`${ENDPOINT_URL}/createData-Diary-Prod?table=Buy`, {
     item,
     isComplete,
     date,
@@ -68,12 +66,12 @@ export async function createBuy(item, isComplete, date, buyId) {
 }
 
 export async function updateBuy(items) {
-  let res = await axios.post(`${ENDPOINT_URL}/updateBuy`, { items });
+  let res = await axios.post(`${ENDPOINT_URL}/updateData-Diary-Prod?table=Buy`, { items });
   return res.data;
 }
 
 export async function deleteBuy(items) {
-  let res = await axios.post(`${ENDPOINT_URL}/deleteBuy`, { items });
+  let res = await axios.post(`${ENDPOINT_URL}/deleteData-Diary-Prod?table=tasks`, { items });
   return res.data;
 }
 
@@ -98,39 +96,31 @@ export async function createJournal(journal, date, journal_id) {
   return res.data;
 }
 
-export async function getAllJGoals() {
+export async function getAllGoals() {
   let res = await axios.get(`${ENDPOINT_URL}/getData-Diary-Prod`, {
     params: { table: "goals" },
   });
   return res.data;
 }
 
-export async function createGoal(goal, isComplete, date, goalId) {
-  let res = await axios.post(`${ENDPOINT_URL}/createGoal`, {
+export async function createGoal(goal, description, isComplete, date, goal_id, type) {
+  let res = await axios.post(`${ENDPOINT_URL}/createData-Diary-Prod?table=goals`, {
     goal,
+    description,
     isComplete,
     date,
-    goalId,
+    goal_id,
+    type
   });
   return res.data;
 }
 
-export async function updateGoals(goal, isComplete, date, goalId) {
-  let res = await axios.post(`${ENDPOINT_URL}/updateGoals`, {
-    goal,
-    isComplete,
-    date,
-    goalId,
-  });
+export async function updateGoals(goals) {
+  let res = await axios.post(`${ENDPOINT_URL}/updateData-Diary-Prod?table=goals`, [...goals]);
   return res.data;
 }
 
-export async function deleteGoals(goal, isComplete, date, goalId) {
-  let res = await axios.post(`${ENDPOINT_URL}/deleteGoals`, {
-    goal,
-    isComplete,
-    date,
-    goalId,
-  });
+export async function deleteGoals(goals) {
+  let res = await axios.post(`${ENDPOINT_URL}/deleteData-Diary-Prod?table=goals`, [...goals]);
   return res.data;
 }

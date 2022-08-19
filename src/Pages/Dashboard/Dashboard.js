@@ -45,7 +45,7 @@ function Dashboard(props) {
         </div>
         <div className="d-flex w-100 mt-4 flex-wrap">
           <div className="p-3 w-50">
-            <Image className="img-fluid" src={goalsImg} />
+            <Image className="img-fluid" src={goalsImg} onClick={() => props.navigateTo(Pages.GOALS)}/>
           </div>
           <div className="p-3 w-50">
             <Image className="img-fluid" src={learningsImg} />

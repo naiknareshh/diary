@@ -15,6 +15,7 @@ import { getApiKey } from "./Services/WebService";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import Goals from "./Pages/Goals/Goals";
 
 const App = () => {
   const [currentPage, setCurrentPage] = useState(Pages.HOME);
@@ -80,6 +81,7 @@ const App = () => {
           [Pages.TASKS]: <Tasks navigateTo={navigateTo} tasks={tasks} />,
           [Pages.JOURNAL]: <Journal navigateTo={navigateTo} />,
           [Pages.BUY]: <Buy navigateTo={navigateTo} />,
+          [Pages.GOALS]: <Goals navigateTo={navigateTo} />,
         }[currentPage]
       }
     </div>

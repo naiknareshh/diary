@@ -27,7 +27,8 @@ const updateOne = () => {
           checked={checkedOne}
           onChange={updateOne}
         />
-        <label className="checkbox-custom-label" onClick={updateOne}><span>{stateProps.name}{ stateProps.subtitle && <><br></br><span className='text-muted'>- {stateProps.subtitle}</span></>}</span></label>
+        <label className="checkbox-custom-label" onClick={updateOne}><span>{stateProps.name}</span></label>
+        { stateProps.subtitle && <div><span className="checkbox-subtitle">{stateProps.subtitle}</span></div>}
       </div>
     </>
   );

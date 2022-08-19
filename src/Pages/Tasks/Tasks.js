@@ -13,12 +13,11 @@ function Tasks(props){
 
     async function getTasks(){
         let res = await getAllTasks();
-        console.log('tasks', res);
         setTasks(res);
     }
 
-    async function createItemCallback(item, isComplete, date, itemId){
-        let res = await createTask(item, isComplete, date, itemId);
+    async function createItemCallback(item, description, isComplete, date, itemId){
+        let res = await createTask(item, description, isComplete, date, itemId);
         return res;
     }
 
@@ -36,6 +35,7 @@ function Tasks(props){
         <ChecklistLayout
             idKey="task_id"
             valKey="task"
+            inputType="text"
             items={tasks}
             refreshList={getTasks}
             createItemCallback={createItemCallback}

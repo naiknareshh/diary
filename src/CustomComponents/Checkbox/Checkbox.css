@@ -43,3 +43,8 @@
     left: 6px;
     margin-bottom: 6px;
 }
+
+.checkbox-subtitle{
+    margin-left: 42px;
+    color: #ddd;
+}

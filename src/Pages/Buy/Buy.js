@@ -16,9 +16,8 @@ function Buy(props){
         setBuys(res);
     }
 
-    async function createItemCallback(item, isComplete, date, itemId){
-        let res = await createBuy(item, isComplete, date, itemId + "");
-        res.item.date = date;
+    async function createItemCallback(item, description, isComplete, date, itemId){
+        let res = await createBuy(item, "",  isComplete, date, itemId);
         return res;
     }
 

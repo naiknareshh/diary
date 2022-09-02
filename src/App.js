@@ -16,6 +16,7 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Goals from "./Pages/Goals/Goals";
+import Wish from "./Pages/Wish/Wish";
 
 const App = () => {
   const [currentPage, setCurrentPage] = useState(Pages.HOME);
@@ -82,6 +83,7 @@ const App = () => {
           [Pages.JOURNAL]: <Journal navigateTo={navigateTo} />,
           [Pages.BUY]: <Buy navigateTo={navigateTo} />,
           [Pages.GOALS]: <Goals navigateTo={navigateTo} />,
+          [Pages.WISH]: <Wish navigateTo={navigateTo}/>
         }[currentPage]
       }
     </div>

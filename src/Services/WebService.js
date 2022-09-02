@@ -55,23 +55,24 @@ export async function getAllBuys() {
   return res.data;
 }
 
-export async function createBuy(item, isComplete, date, buyId) {
-  let res = await axios.post(`${ENDPOINT_URL}/createData-Diary-Prod?table=Buy`, {
+export async function createBuy(item, description, isComplete, date, buyId) {
+  let res = await axios.post(`${ENDPOINT_URL}/createData-Diary-Prod?table=buy`, {
     item,
+    description,
     isComplete,
     date,
-    buyId,
+    buy_id: String(buyId),
   });
   return res.data;
 }
 
 export async function updateBuy(items) {
-  let res = await axios.post(`${ENDPOINT_URL}/updateData-Diary-Prod?table=Buy`, { items });
+  let res = await axios.post(`${ENDPOINT_URL}/updateData-Diary-Prod?table=buy`, [ ...items ]);
   return res.data;
 }
 
 export async function deleteBuy(items) {
-  let res = await axios.post(`${ENDPOINT_URL}/deleteData-Diary-Prod?table=tasks`, { items });
+  let res = await axios.post(`${ENDPOINT_URL}/deleteData-Diary-Prod?table=buy`, [ ...items ]);
   return res.data;
 }
 
@@ -122,5 +123,36 @@ export async function updateGoals(goals) {
 
 export async function deleteGoals(goals) {
   let res = await axios.post(`${ENDPOINT_URL}/deleteData-Diary-Prod?table=goals`, [...goals]);
+  return res.data;
+}
+
+export async function getAllWishes() {
+  let res = await axios.get(`${ENDPOINT_URL}/getData-Diary-Prod`, {
+    params: { table: "wish" },
+  });
+  return res.data;
+}
+
+export async function createWish(wish, description, isComplete, date, wish_id) {
+  let res = await axios.post(
+    `${ENDPOINT_URL}/createData-Diary-Prod?table=wish`,
+    { wish, description, isComplete, date, wish_id: String(wish_id) }
+  );
+  return res.data;
+}
+
+export async function updateWishes(items) {
+  let res = await axios.post(
+    `${ENDPOINT_URL}/updateData-Diary-Prod?table=wish`,
+    [...items]
+  );
+  return res.data;
+}
+
+export async function deleteWishes(items) {
+  let res = await axios.post(
+    `${ENDPOINT_URL}/deleteData-Diary-Prod?table=wish`,
+    [...items]
+  );
   return res.data;
 }

@@ -6,6 +6,7 @@ import goalsImg from "../../Images/goals.png";
 import learningsImg from "../../Images/learnings.png";
 import problemsImg from "../../Images/problems.png";
 import journalImg from "../../Images/journal.png";
+import wishImg from '../../Images/wish.png';
 
 import { useEffect, useState } from "react";
 
@@ -65,6 +66,13 @@ function Dashboard(props) {
               className="img-fluid"
               src={journalImg}
               onClick={() => props.navigateTo(Pages.JOURNAL)}
+            />
+          </div>
+          <div className="p-3 w-50">
+            <Image
+              className="img-fluid"
+              src={wishImg}
+              onClick={() => props.navigateTo(Pages.WISH)}
             />
           </div>
         </div>

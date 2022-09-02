@@ -1,43 +1,43 @@
 import { useEffect, useState } from "react";
 import ChecklistLayout from "../../Layouts/Checklist/ChecklistLayout";
 
-import { getAllTasks, createTask, deleteTasks, updateTasks } from '../../Services/WebService';
+import { getAllWishes, createWish, deleteWishes, updateWishes } from '../../Services/WebService';
 
-function Tasks(props){
+function Wish(props){
 
-    const [tasks, setTasks] = useState([]);
+    const [wishs, setWishes] = useState([]);
 
     useEffect(() => {
-      getTasks();
+      getWishes();
     }, []);
 
-    async function getTasks(){
-        let res = await getAllTasks();
-        setTasks(res);
+    async function getWishes(){
+        let res = await getAllWishes();
+        setWishes(res);
     }
 
     async function createItemCallback(item, description, isComplete, date, itemId){
-        let res = await createTask(item, description, isComplete, date, itemId);
+        let res = await createWish(item, description, isComplete, date, itemId);
         return res;
     }
 
     async function deleteItemCallback(itemList){
-        let res = await deleteTasks(itemList);
+        let res = await deleteWishes(itemList);
         return res;
     }
 
     async function updateItemCallback(itemList){
-        let res = await updateTasks(itemList);
+        let res = await updateWishes(itemList);
         return res;
     }
 
     return (
         <ChecklistLayout
-            idKey="task_id"
-            valKey="task"
+            idKey="wish_id"
+            valKey="wish"
             inputType="text-2"
-            items={tasks}
-            refreshList={getTasks}
+            items={wishs}
+            refreshList={getWishes}
             createItemCallback={createItemCallback}
             deleteItemCallback={deleteItemCallback}
             updateItemCallback={updateItemCallback}
@@ -46,4 +46,4 @@ function Tasks(props){
     )
 }
 
-export default Tasks;
+export default Wish;

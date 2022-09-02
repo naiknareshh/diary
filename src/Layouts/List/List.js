@@ -1,4 +1,4 @@
-import styles from "./Journal.module.css";
+import styles from "./Item.module.css";
 import Button from "react-bootstrap/Button";
 import { Pages } from "../../Constants";
 import ListGroup from "react-bootstrap/ListGroup";
@@ -7,37 +7,37 @@ import { useEffect, useState, useRef } from "react";
 
 import InputModal from "../../CustomComponents/InputModal/InputModal";
 
-import { createJournal, getAllJournals } from "../../Services/WebService";
+import { createItem, getAllItems } from "../../Services/WebService";
 
-function Journal(props) {
+function Item(props) {
   const [show, setShow] = useState(false);
-  const [newJournal, setNewJournal] = useState("");
+  const [newItem, setNewItem] = useState("");
   const handleClose = () => setShow(false);
   const [loading, setLoading] = useState(false);
   const [showToast, setShowToast] = useState(false);
   const [toastText, setToastText] = useState("");
-  const [journals, setJournals] = useState([]);
+  const [items, setItems] = useState([]);
 
   const date = new Date();
 
   function onChange(e) {
-    setNewJournal(e.target.value);
+    setNewItem(e.target.value);
   }
 
   useEffect(() => {
-    async function getJournals() {
-      let res = await getAllJournals();
-      setJournals(res);
+    async function getItems() {
+      let res = await getAllItems();
+      setItems(res);
     }
 
-    getJournals();
+    getItems();
   }, []);
 
   async function handleSubmit() {
     setLoading(true);
-    let journalId = journals.length + 1;
-    await createJournal(newJournal,  getAdjustedDate(), String(journalId));
-    setJournals([...journals, { journal: newJournal, date: getAdjustedDate(), journal_id: journalId } ]);
+    let itemId = items.length + 1;
+    await createItem(newItem,  getAdjustedDate(), String(itemId));
+    setItems([...items, { item: newItem, date: getAdjustedDate(), item_id: itemId } ]);
     handleClose();
     setLoading(false);
     setShowToast(true);
@@ -71,12 +71,12 @@ function Journal(props) {
       </div>
 
       <ListGroup className="flex-column-reverse">
-        {journals.map((journal) => {
+        {items.map((item) => {
           return (
-            <ListGroup.Item key={journal.journal_id}>
+            <ListGroup.Item key={item.item_id}>
               <div className="d-flex align-items-center">
-                <span className={`${styles.date} text-muted`}>{journal.date}</span>
-                <span>{journal.journal}</span>
+                <span className={`${styles.date} text-muted`}>{item.date}</span>
+                <span>{item.item}</span>
               </div>
             </ListGroup.Item>
           );
@@ -95,7 +95,7 @@ function Journal(props) {
       <InputModal
         show={show}
         title="Create"
-        label="Journal"
+        label="Item"
         onChange={onChange}
         handleClose={handleClose}
         handleSubmit={handleSubmit}
@@ -106,4 +106,4 @@ function Journal(props) {
   );
 }
 
-export default Journal;
+export default Item;

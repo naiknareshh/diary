@@ -10,13 +10,12 @@ import { getAllTasks, setApiKey } from "./Services/WebService";
 import "font-awesome/css/font-awesome.min.css";
 import Journal from "./Pages/Journal/Journal";
 
-import { getApiKey } from "./Services/WebService";
-
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Goals from "./Pages/Goals/Goals";
 import Wish from "./Pages/Wish/Wish";
+import Learnings from "./Pages/Learnings/Learnings";
 
 const App = () => {
   const [currentPage, setCurrentPage] = useState(Pages.HOME);
@@ -83,7 +82,8 @@ const App = () => {
           [Pages.JOURNAL]: <Journal navigateTo={navigateTo} />,
           [Pages.BUY]: <Buy navigateTo={navigateTo} />,
           [Pages.GOALS]: <Goals navigateTo={navigateTo} />,
-          [Pages.WISH]: <Wish navigateTo={navigateTo}/>
+          [Pages.WISH]: <Wish navigateTo={navigateTo}/>,
+          [Pages.LEARNINGS]: <Learnings navigateTo={navigateTo}/>,
         }[currentPage]
       }
     </div>

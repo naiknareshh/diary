@@ -6,7 +6,7 @@ import goalsImg from "../../Images/goals.png";
 import learningsImg from "../../Images/learnings.png";
 import problemsImg from "../../Images/problems.png";
 import journalImg from "../../Images/journal.png";
-import wishImg from '../../Images/wish.png';
+import wishImg from "../../Images/wish.png";
 
 import { useEffect, useState } from "react";
 
@@ -46,10 +46,18 @@ function Dashboard(props) {
         </div>
         <div className="d-flex w-100 mt-4 flex-wrap">
           <div className="p-3 w-50">
-            <Image className="img-fluid" src={goalsImg} onClick={() => props.navigateTo(Pages.GOALS)}/>
+            <Image
+              className="img-fluid"
+              src={goalsImg}
+              onClick={() => props.navigateTo(Pages.GOALS)}
+            />
           </div>
           <div className="p-3 w-50">
-            <Image className="img-fluid" src={learningsImg} />
+            <Image
+              className="img-fluid"
+              src={learningsImg}
+              onClick={() => props.navigateTo(Pages.LEARNINGS)}
+            />
           </div>
           <div className="p-3 w-50">
             <Image

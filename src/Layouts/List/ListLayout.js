@@ -1,4 +1,4 @@
-import styles from "./Item.module.css";
+import styles from "./ListLayout.module.css";
 import Button from "react-bootstrap/Button";
 import { Pages } from "../../Constants";
 import ListGroup from "react-bootstrap/ListGroup";
@@ -7,9 +7,7 @@ import { useEffect, useState, useRef } from "react";
 
 import InputModal from "../../CustomComponents/InputModal/InputModal";
 
-import { createItem, getAllItems } from "../../Services/WebService";
-
-function Item(props) {
+function ListLayout(props) {
   const [show, setShow] = useState(false);
   const [newItem, setNewItem] = useState("");
   const handleClose = () => setShow(false);
@@ -17,6 +15,7 @@ function Item(props) {
   const [showToast, setShowToast] = useState(false);
   const [toastText, setToastText] = useState("");
   const [items, setItems] = useState([]);
+  const [newItemDescription, setNewItemDescription] = useState("");
 
   const date = new Date();
 
@@ -24,24 +23,25 @@ function Item(props) {
     setNewItem(e.target.value);
   }
 
-  useEffect(() => {
-    async function getItems() {
-      let res = await getAllItems();
-      setItems(res);
-    }
+  function onChangeDescription(e){
+    setNewItemDescription(e.target.value);
+  }
 
-    getItems();
-  }, []);
+  useEffect(() => {
+    setItems(props.items);
+  }, [props.items]);
 
   async function handleSubmit() {
     setLoading(true);
     let itemId = items.length + 1;
-    await createItem(newItem,  getAdjustedDate(), String(itemId));
-    setItems([...items, { item: newItem, date: getAdjustedDate(), item_id: itemId } ]);
+    await props.createItemCallback(newItem, newItemDescription,  getAdjustedDate(), String(itemId));
+    setItems([...items, { [props.valKey]: newItem, description: newItemDescription, date: getAdjustedDate(), [props.idKey]: itemId } ]);
     handleClose();
     setLoading(false);
     setShowToast(true);
+    setNewItemDescription("");
     setToastText("Saved successfully");
+    props.refreshList();
   }
 
   function getAdjustedDate(){
@@ -76,7 +76,7 @@ function Item(props) {
             <ListGroup.Item key={item.item_id}>
               <div className="d-flex align-items-center">
                 <span className={`${styles.date} text-muted`}>{item.date}</span>
-                <span>{item.item}</span>
+                <span>{item[props.valKey]} <span style={{ fontStyle: 'italic', display: item.description ? "block" : "none" }} class="text-muted">- {item.description}</span></span>
               </div>
             </ListGroup.Item>
           );
@@ -97,13 +97,14 @@ function Item(props) {
         title="Create"
         label="Item"
         onChange={onChange}
+        onChangeDescription={onChangeDescription}
         handleClose={handleClose}
         handleSubmit={handleSubmit}
         loading={loading}
-        inputType="textarea"
+        inputType={props.inputType}
       />
     </>
   );
 }
 
-export default Item;
+export default ListLayout;

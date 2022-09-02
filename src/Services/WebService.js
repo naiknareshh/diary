@@ -97,6 +97,28 @@ export async function createJournal(journal, date, journal_id) {
   return res.data;
 }
 
+export async function getAllLearnings() {
+  let res = await axios.get(`${ENDPOINT_URL}/getData-Diary-Prod`, {
+    params: { table: "learnings" },
+  });
+  return res.data.sort((a, b) => {
+    return a.learning_id - b.learning_id;
+  });
+}
+
+export async function createLearning(learning, description, date, learning_id) {
+  let res = await axios.post(
+    `${ENDPOINT_URL}/createData-Diary-Prod?table=learnings`,
+    {
+      learning,
+      description,
+      date,
+      learning_id,
+    }
+  );
+  return res.data;
+}
+
 export async function getAllGoals() {
   let res = await axios.get(`${ENDPOINT_URL}/getData-Diary-Prod`, {
     params: { table: "goals" },

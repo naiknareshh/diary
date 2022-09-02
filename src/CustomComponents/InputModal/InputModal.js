@@ -27,6 +27,23 @@ function InputModal(props) {
           />
         </>
       );
+    } else if (props.inputType === "textarea-text") {
+      return (
+        <>
+          <Form.Control
+            as="textarea"
+            autoFocus
+            onChange={props.onChange}
+            rows={5}
+          />
+          <Form.Control
+            type="text"
+            className="mt-4"
+            onChange={props.onChangeDescription}
+            placeholder="Description"
+          />
+        </>
+      );
     } else {
       return (
         <Form.Control

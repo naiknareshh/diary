@@ -70,7 +70,7 @@ function ListLayout(props) {
         </Button>
       </div>
 
-      <ListGroup className="flex-column-reverse">
+      <ListGroup className={`flex-column-reverse ${styles.listgroup}`}>
         {items.map((item) => {
           return (
             <ListGroup.Item key={item.item_id}>

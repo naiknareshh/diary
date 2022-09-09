@@ -11,13 +11,13 @@ function Journal(props) {
     getJournals();
   }, []);
 
-  async function getJournals(){
+  async function getJournals(){ 
       let res = await getAllJournals();
       setJournals(res);
   }
 
-  async function createItemCallback(item, description, isComplete, date, itemId){
-      let res = await createJournal(item, description, isComplete, date, itemId);
+  async function createItemCallback(item, description, date, itemId){
+      let res = await createJournal(item, date, itemId);
       return res;
   }
 
